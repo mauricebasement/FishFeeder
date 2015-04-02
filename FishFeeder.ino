@@ -8,6 +8,7 @@ int directionPin = 3;
 int enablePin = 4;
 int a = 0;
 int time = 0;
+tmElements_t tm;
 
 void setup() 
 {                
@@ -16,20 +17,22 @@ void setup()
   pinMode(enablePin, OUTPUT);       
   time = 60*60*1000;
   Serial.begin(9600);
-  while (!Serial) ; // wait for serial
+  while (!Serial) ;
   delay(200);
   Serial.println("Fish Feeder Command Line Mode");
   getTime();
-  Alarm.alarmRepeat(8,00,0, FeedAlarm);  // 8:30am every day
-  Alarm.alarmRepeat(12,00,0, FeedAlarm);  // 8:30am every day
-  Alarm.alarmRepeat(16,00,0, FeedAlarm);  // 8:30am every day
-  Alarm.alarmRepeat(18,00,0, FeedAlarm);  // 8:30am every day
+  Alarm.alarmRepeat(8,00,0, FeedAlarm);
+  Alarm.alarmRepeat(12,00,0, FeedAlarm);
+  Alarm.alarmRepeat(16,00,0, FeedAlarm);
+  Alarm.alarmRepeat(18,00,0, FeedAlarm);
+  Alarm.alarmRepeat(00,00,0, getTime);
 }
 
 
 void loop() 
 {
   Alarm.delay(1000);
+  checkCommandLine();
 }
 
 void FeedAlarm() {
@@ -56,13 +59,42 @@ void makeStep(int numberOfSteps) {
 }
 
 void getTime() {
-  tmElements_t tm;
-
   if (RTC.read(tm)) {
     Serial.println("Time OK");
     setTime(tm.Hour,tm.Minute,tm.Second,tm.Day,tm.Month,tm.Year);
   } else {
     Serial.println("DS1307 read error!  Replace Device!");
   }
-  
+}
+
+void printTime() {
+    print2digits(tm.Hour);
+    Serial.write(':');
+    print2digits(tm.Minute);
+    Serial.write(':');
+    print2digits(tm.Second);
+    Serial.print(", Date (D/M/Y) = ");
+    Serial.print(tm.Day);
+    Serial.write('/');
+    Serial.print(tm.Month);
+    Serial.write('/');
+    Serial.print(tmYearToCalendar(tm.Year));
+    Serial.println();
+}
+
+void print2digits(int number) {
+  if (number >= 0 && number < 10) {
+    Serial.write('0');
+  }
+  Serial.print(number);
+}
+
+void checkCommandLine() {
+  while (Serial.available()) {
+    c = Serial.read();  
+  }
+  if (c == 't' ) {
+    FeedAlram();
+    Serial.println("Manually Feed!");
+  }
 }
