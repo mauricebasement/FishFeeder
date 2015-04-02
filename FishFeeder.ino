@@ -8,6 +8,7 @@ int directionPin = 3;
 int enablePin = 4;
 int a = 0;
 int time = 0;
+char c;
 tmElements_t tm;
 
 void setup() 
@@ -94,7 +95,20 @@ void checkCommandLine() {
     c = Serial.read();  
   }
   if (c == 't' ) {
-    FeedAlram();
+    FeedAlarm();
     Serial.println("Manually Feed!");
+  }  if (c == 'p' ) {
+    printTime();
+  } if (c == 'b' ) {
+    printBattery();
   }
+  c = 'a';
+}
+
+void printBattery() {
+  int sensorValue = analogRead(A1);
+  float voltage = sensorValue * (5.0 / 1023.0);
+  Serial.print("Battery Voltage:"); 
+  Serial.print(voltage); 
+  Serial.println("V"); 
 }
