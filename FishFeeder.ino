@@ -69,7 +69,7 @@ void getTime() {
 }
 
 void printTime() {
-    print2digits(tm.Hour);
+    print2digits(tm.Hour);b
     Serial.write(':');
     print2digits(tm.Minute);
     Serial.write(':');
