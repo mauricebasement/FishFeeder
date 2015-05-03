@@ -23,11 +23,19 @@ void setup()
   Serial.println("Fish Feeder Command Line Mode");
   getTime();
   Alarm.alarmRepeat(6,00,0, FeedAlarm);
+  Alarm.alarmRepeat(7,00,0, FeedAlarm);
+  Alarm.alarmRepeat(8,00,0, FeedAlarm);
   Alarm.alarmRepeat(9,00,0, FeedAlarm);
+  Alarm.alarmRepeat(10,00,0, FeedAlarm);
+  Alarm.alarmRepeat(11,00,0, FeedAlarm);
   Alarm.alarmRepeat(12,00,0, FeedAlarm);
-  Alarm.alarmRepeat(13,30,0, FeedAlarm);
-  Alarm.alarmRepeat(15,00,0, FeedAlarm);
+  Alarm.alarmRepeat(13,00,0, FeedAlarm);
+  Alarm.alarmRepeat(14,00,0, FeedAlarm);
+  Alarm.alarmRepeat(15,30,0, FeedAlarm);
+  Alarm.alarmRepeat(16,00,0, FeedAlarm);
+  Alarm.alarmRepeat(17,00,0, FeedAlarm);
   Alarm.alarmRepeat(18,00,0, FeedAlarm);
+  Alarm.alarmRepeat(19,00,0, FeedAlarm);
   Alarm.alarmRepeat(00,00,0, getTime);
 }
 
