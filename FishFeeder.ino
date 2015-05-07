@@ -44,7 +44,7 @@ void setup()
   Alarm.alarmRepeat(15,30,0, FeedAlarm);
   Alarm.alarmRepeat(16,00,0, FeedAlarm);
   Alarm.alarmRepeat(16,30,0, FeedAlarm);
-  Alarm.alarmRepeat(17,00,0, FeedAlarm
+  Alarm.alarmRepeat(17,00,0, FeedAlarm);
   Alarm.alarmRepeat(17,30,0, FeedAlarm);
   Alarm.alarmRepeat(18,00,0, FeedAlarm);
   Alarm.alarmRepeat(18,30,0, FeedAlarm);
